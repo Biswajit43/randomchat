@@ -1,4 +1,8 @@
-const BASE_URL = "https://randomchat-bfn9.onrender.com";
+const DEFAULT_API_BASE = typeof window !== "undefined" && window.location.hostname !== "localhost"
+  ? "https://randomchat-bfn9.onrender.com"
+  : "http://localhost:5000";
+
+const BASE_URL = (import.meta.env.VITE_API_URL || DEFAULT_API_BASE).replace(/\/+$/, "");
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}/api${path}`, {

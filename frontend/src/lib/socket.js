@@ -1,6 +1,10 @@
 import { io } from "socket.io-client";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
+const DEFAULT_SERVER_URL = typeof window !== "undefined" && window.location.hostname !== "localhost"
+  ? "https://randomchat-bfn9.onrender.com"
+  : "http://localhost:5000";
+
+const SERVER_URL = (import.meta.env.VITE_SERVER_URL || DEFAULT_SERVER_URL).replace(/\/+$/, "");
 
 // Lazily connected so we don't open a socket until the user actually
 // consents (age gate) and lands in the queue.
