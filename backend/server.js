@@ -57,6 +57,9 @@ registerSignaling(io);
 registerGroupRooms(io);
 
 const PORT = process.env.PORT || 5000;
+app.get('/' , (req,res) => {
+res.send("working ... ")
+})
 
 connectDB().finally(() => {
   server.listen(PORT, () => console.log(`[server] listening on :${PORT}`));
