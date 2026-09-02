@@ -28,7 +28,9 @@ process.on("uncaughtException", (err) => {
 
 const app = express();
 const server = http.createServer(app);
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const CLIENT_URL = (process.env.CLIENT_URL || "http://localhost:5173")
+  .trim()
+  .replace(/\/+$/, "");
 
 app.use(helmet());
 app.use(cors({ origin: CLIENT_URL }));
@@ -55,6 +57,9 @@ registerSignaling(io);
 registerGroupRooms(io);
 
 const PORT = process.env.PORT || 5000;
+app.get('/' , (req,res) => {
+res.send("working ... ")
+})
 
 connectDB().finally(() => {
   server.listen(PORT, () => console.log(`[server] listening on :${PORT}`));

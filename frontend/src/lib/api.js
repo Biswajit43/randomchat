@@ -1,4 +1,4 @@
-const BASE_URL = "https://randomchat-bfn9.onrender.com" || "http://localhost:5000";
+const BASE_URL = "https://randomchat-bfn9.onrender.com";
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}/api${path}`, {
